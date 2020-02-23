@@ -1,0 +1,8 @@
+---
+- hosts: server
+  become: yes
+  tasks:
+    
+    - name: 'Run password policy configuration role'
+      include_role:
+        name: 'rhel_pass_policy'

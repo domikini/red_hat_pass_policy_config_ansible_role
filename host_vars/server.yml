@@ -1,0 +1,60 @@
+---
+host: localhost
+port: 2222
+connection: ssh
+user: vagrant
+ssh_private_key_file_path: /<path-to-ssh-prvate-key>
+
+#Password settings
+
+# 1. Number of previous password which cannot be reused
+number_of_previous_passwords_rule_active: true
+number_of_previous_passwords: 5
+
+# 2. Password size (Minimum acceptable size for the new password)
+password_size_rule_active: true
+password_size: 9
+
+
+# Rule 3 - 6
+#1) Credit Value > 0 : Maximum credit for having respective characters in the new password.
+#2) Credit Value < 0 : Minimum mandatory credit required for having respective characters in the new password.
+#3) Credit Value = 0 : No mandatory requirement for having the respective character class in the new password.
+
+# 3. Number of digits in password
+password_digits_in_password_rule_active: true
+number_of_digits: -1
+
+# 4. Number of Upper case in password
+password_upper_case_in_password_rule_active: true
+number_of_upper_case: -1
+
+# 5. Number of Lower case in password
+password_lower_case_in_password_rule_active: true
+number_of_lower_case: -1
+
+# 6. Number of Other characters in password
+password_other_characters_in_password_rule_active: true
+number_of_other_characters: -1
+
+
+
+
+# 7. Set minimum number of required classes in new password (digits, uppercase, lowercase, others)
+password_minimum_of_required_character_classes_in_password_rule_active: true
+minimum_of_required_character_classes: 2
+
+# 8. Set maximum number of allowed consecutive same characters in the new password
+password_maximum_number_of_allowed_consecutive_same_characters_in_password_rule_active: true
+maximum_of_allowed_consecutive_same_characters: 9
+
+# 9. A maximum number of allowed consecutive characters of the same class in the new password
+password_maximum_number_of_allowed_consecutive_same_class_in_password_rule_active: true
+maximum_of_allowed_consecutive_same_class: 9
+
+# 10. A maximum number of characters that is allowed to use in new passwords(compared to old password)
+password_maximum_number_of_allowed_characters_from_old_password_rule_active: true
+maximum_number_of_allowed_characters_from_old_password: 9
+
+# 11. Enforce root for password complexity
+password_enforce_password_complexity_on_root_rule_active: false

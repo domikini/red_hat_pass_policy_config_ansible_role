@@ -1,0 +1,95 @@
+---
+- name: 'Keep history of used passwords (the number of previous passwords which cannot be reused)'
+  lineinfile:
+    path: '/etc/pam.d/password-auth'
+    regexp: 'pam_pwhistory.so'
+    insertafter: 'pam_pwquality.so'    
+    line: 'password    requisite     pam_pwhistory.so remember={{ number_of_previous_passwords }} use_authtok'
+  when: number_of_previous_passwords_rule_active
+
+- name: 'Keep history of used passwords (the number of previous passwords which cannot be reused)'
+  lineinfile:
+    path: '/etc/pam.d/system-auth'
+    regexp: 'pam_pwhistory.so'
+    insertafter: 'pam_pwquality.so'    
+    line: 'password    requisite     pam_pwhistory.so remember={{ number_of_previous_passwords }} use_authitok'
+  when: number_of_previous_passwords_rule_active
+
+- name: 'Set minimum password size'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'minlen ='
+    line: 'minlen = {{ password_size }}'
+  when: password_size_rule_active
+
+- name: 'Set number of digits in password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'dcredit ='
+    line: 'dcredit = {{ number_of_digits }}'
+  when: password_digits_in_password_rule_active
+
+- name: 'Set number of Upper case in password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'ucredit ='
+    line: 'ucredit = {{ number_of_upper_case }}'
+  when: password_upper_case_in_password_rule_active
+
+- name: 'Set number of Lower case in password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'lcredit ='
+    line: 'lcredit = {{ number_of_lower_case }}'
+  when: password_lower_case_in_password_rule_active
+
+- name: 'Set number of Other characters in password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'ocredit ='
+    line: 'ocredit = {{ number_of_other_characters }}'
+  when: password_other_characters_in_password_rule_active
+
+- name: 'Set minimum number of required classes in new password (digits, uppercase, lowercase, others)'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'minclass ='
+    line: 'minclass = {{ minimum_of_required_character_classes }}'
+  when: password_minimum_of_required_character_classes_in_password_rule_active
+
+- name: 'Set maximum number of allowed consecutive same characters in the new password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'maxrepeat ='
+    line: 'maxrepeat = {{ maximum_of_allowed_consecutive_same_characters }}'
+  when: password_maximum_number_of_allowed_consecutive_same_characters_in_password_rule_active
+
+- name: 'A maximum number of allowed consecutive characters of the same class in the new password'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'maxclassrepeat ='
+    line: 'maxclassrepeat = {{ maximum_of_allowed_consecutive_same_class }}'
+  when: password_maximum_number_of_allowed_consecutive_same_class_in_password_rule_active
+
+- name: 'A maximum number of characters that is allowed to use in new passwords(compared to old password)'
+  lineinfile:
+    path: '/etc/security/pwquality.conf'
+    regexp: 'difok ='
+    line: 'difok = {{ maximum_number_of_allowed_characters_from_old_password }}'
+  when: password_maximum_number_of_allowed_characters_from_old_password_rule_active
+
+- name: 'Enforce password complexity on root'
+  lineinfile:
+    path: '/etc/pam.d/password-auth'
+    regexp: 'enforce_for_root'
+    insertafter: 'password'    
+    line: 'enforce_for_root'
+  when: password_enforce_password_complexity_on_root_rule_active
+
+- name: 'Enforce password complexity on root'
+  lineinfile:
+    path: '/etc/pam.d/system-auth'
+    regexp: 'enforce_for_root'
+    insertafter: 'password'    
+    line: 'enforce_for_root'
+  when: password_enforce_password_complexity_on_root_rule_active
