@@ -3,7 +3,7 @@ host: localhost
 port: 2222
 connection: ssh
 user: vagrant
-ssh_private_key_file_path: /<path-to-ssh-prvate-key>
+ssh_private_key_file_path: /<path-to-ssh-private-key>
 
 #Password settings
 
